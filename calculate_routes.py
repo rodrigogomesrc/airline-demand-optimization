@@ -1,4 +1,5 @@
 import sys
+from CycleFinder import CycleFinder
 
 filename = sys.argv[1]
 edges = []
@@ -12,10 +13,9 @@ def order_edges_by_greater_weight(edges):
     edges.sort(key=lambda x: x[2], reverse=True)
     return edges
 
-# Todo: implement the algorithm
 def is_graph_cycle(edges):
-    return False
-
+    cycle_finder = CycleFinder(edges)
+    return cycle_finder.is_cycle()
 
 with open(filename, 'r') as f:
     for line in f:
@@ -45,5 +45,9 @@ def calculate_routes(edges):
     return result_edges
 
 print(calculate_routes(edges))
+
+#teste = CycleFinder(edges)
+#teste.get_adjacency_list(edges)
+#teste.print_adjacency_list()
 
 
