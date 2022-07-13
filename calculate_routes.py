@@ -13,7 +13,7 @@ def order_edges_by_greater_weight(edges):
     return edges
 
 # Todo: implement the algorithm
-def check_cycle_in_graph(edges):
+def is_graph_cycle(edges):
     return False
 
 
@@ -33,4 +33,17 @@ with open(filename, 'r') as f:
             edges.append((n1, n2, weight))
 
 edges = order_edges_by_greater_weight(edges)
-print(edges)
+
+
+def calculate_routes(edges):
+    result_edges = set()
+    for i in range(len(edges)):
+        current_edge = {(edges[i][0], edges[i][1])}
+        if(not is_graph_cycle(result_edges | current_edge)):
+            result_edges = result_edges | current_edge
+
+    return result_edges
+
+print(calculate_routes(edges))
+
+
