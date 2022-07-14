@@ -5,11 +5,13 @@ class CycleFinder:
         self.stack = []
         self.vertices_visited_info = {}
         self.cycle_exists = False
-
+        self.initialize_vertices_visited_info(edges)
+    
+    def initialize_vertices_visited_info(self, edges):
         for edge in edges:
             self.vertices_visited_info[edge[0]] = False
             self.vertices_visited_info[edge[1]] = False
-           
+
     def get_adjacency_list(self, edges):
         adjacency_list = {}
         for edge in edges:
