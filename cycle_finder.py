@@ -35,6 +35,7 @@ class CycleFinder:
         self.search(list(self.adjacency_list.keys())[0])
         return self.cycle_exists
 
+    # recursive depth-first search function to find cycles on the graph
     def search(self, vertex):
         self.vertices_visited_info[vertex] = True
         self.stack.append(vertex)

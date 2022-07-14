@@ -16,6 +16,7 @@ class RoutesOptimization():
         cycle_finder = CycleFinder(edges)       
         return cycle_finder.is_cycle()
 
+    # using kruskal algorithm
     def calculate_routes(self):
         edges = self.input_edges.copy()
         self.order_edges_by_greater_weight(edges)
@@ -28,6 +29,11 @@ class RoutesOptimization():
         return result_edges
 
 if __name__ == "__main__":
+
+    # get all files and execute them, ploting the times
+    if(sys.argv[1] == "--all"):
+        pass
+
     io = Io(sys.argv[1])
     routes = RoutesOptimization(io.get_edges())
     
