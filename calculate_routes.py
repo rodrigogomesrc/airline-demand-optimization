@@ -25,7 +25,7 @@ class RoutesOptimization():
             if(not self.is_graph_cycle(current_edge | result_edges)):
                 result_edges = result_edges | current_edge
 
-        return list(result_edges)
+        return result_edges
 
 if __name__ == "__main__":
     io = Io(sys.argv[1])
