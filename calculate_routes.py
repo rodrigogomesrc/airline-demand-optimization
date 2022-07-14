@@ -39,15 +39,25 @@ def calculate_routes(edges):
     result_edges = set()
     for i in range(len(edges)):
         current_edge = {(edges[i][0], edges[i][1])}
-        if(not is_graph_cycle(result_edges | current_edge)):
+    
+        if(not is_graph_cycle(current_edge | result_edges)):
             result_edges = result_edges | current_edge
 
     return result_edges
 
+def get_edges_without_weight(edges):
+    result_edges = set()
+    for i in range(len(edges)):
+        result_edges.add((edges[i][0], edges[i][1]))
+    return result_edges
+
+
+print("input edges")
+print(get_edges_without_weight(edges))
+print("\n")
+
+print("calculated edges:")
 print(calculate_routes(edges))
 
-#teste = CycleFinder(edges)
-#teste.get_adjacency_list(edges)
-#teste.print_adjacency_list()
 
 

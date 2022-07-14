@@ -1,7 +1,6 @@
 class CycleFinder:
 
     def __init__(self, edges):
-        print(edges)
         self.adjacency_list = self.get_adjacency_list(edges)
         self.stack = []
         self.vertices_visited_info = {}
@@ -11,7 +10,6 @@ class CycleFinder:
             self.vertices_visited_info[edge[0]] = False
             self.vertices_visited_info[edge[1]] = False
            
-
     def get_adjacency_list(self, edges):
         adjacency_list = {}
         for edge in edges:
@@ -30,12 +28,10 @@ class CycleFinder:
         for key in self.adjacency_list:
             print(key, self.adjacency_list[key])
         print("\n")
-        
 
     def is_cycle(self):
         self.search(list(self.adjacency_list.keys())[0])
-        return self.is_cycle
-
+        return self.cycle_exists
 
     def search(self, vertex):
         self.vertices_visited_info[vertex] = True
