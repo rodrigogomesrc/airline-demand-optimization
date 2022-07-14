@@ -1,13 +1,8 @@
 import sys
-from CycleFinder import CycleFinder
+from cycle_finder import CycleFinder
+from graph_io import Io
 
 filename = sys.argv[1]
-edges = []
-lines = 0
-
-third_values = []
-vertices = []
-header = ""
 
 def order_edges_by_greater_weight(edges):
     edges.sort(key=lambda x: x[2], reverse=True)
@@ -17,20 +12,8 @@ def is_graph_cycle(edges):
     cycle_finder = CycleFinder(edges)
     return cycle_finder.is_cycle()
 
-with open(filename, 'r') as f:
-    for line in f:
-        if line.startswith('%'):
-            header = line
-        elif line.startswith('n'):
-            lines = max(lines, int(line.split()[3]))
-            vertices.append(line)
-        elif line.startswith('e'):
-            split_line = line.split()
-            n1 = int(split_line[1])
-            n2 = int(split_line[2])
-            third_values.append(int(split_line[3]))
-            weight = int(split_line[4])
-            edges.append((n1, n2, weight))
+io = Io(filename)
+edges = io.get_edges()
 
 edges = order_edges_by_greater_weight(edges)
 
@@ -38,22 +21,15 @@ edges = order_edges_by_greater_weight(edges)
 def calculate_routes(edges):
     result_edges = set()
     for i in range(len(edges)):
-        current_edge = {(edges[i][0], edges[i][1])}
-    
+        current_edge = {(edges[i][0], edges[i][1], edges[i][2])}
         if(not is_graph_cycle(current_edge | result_edges)):
             result_edges = result_edges | current_edge
 
     return result_edges
 
-def get_edges_without_weight(edges):
-    result_edges = set()
-    for i in range(len(edges)):
-        result_edges.add((edges[i][0], edges[i][1]))
-    return result_edges
-
 
 print("input edges")
-print(get_edges_without_weight(edges))
+print(edges)
 print("\n")
 
 print("calculated edges:")
