@@ -47,7 +47,7 @@ if __name__ == "__main__":
             optimization_obj = RoutesOptimization(io.get_edges())
             routes = RoutesOptimization(io.get_edges())
             result = routes.calculate_routes()
-            io.save_to_file(result, "./results/" + file_location)
+            io.save_to_file(result, "./results/" + file)
             end_time = time.time()
             print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
             stats.add_data(file, (end_time - start_time) * 1000)
