@@ -1,4 +1,5 @@
 import sys
+import time
 from cycle_finder import CycleFinder
 from graph_io import Io
 import os
@@ -38,6 +39,7 @@ if __name__ == "__main__":
     if(sys.argv[1] == "--all"):
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
         for file in files:
+            start_time = time.time()
             print("calculating for file: " + file)
             file_location = "./test_cases/" + file
             io.read_file(file_location)
@@ -45,8 +47,11 @@ if __name__ == "__main__":
             routes = RoutesOptimization(io.get_edges())
             result = routes.calculate_routes()
             io.save_to_file(result, "./results/" + file_location)
+            end_time = time.time()
+            print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
 
     else:
+        start_time = time.time()
         filename = sys.argv[1]
         print("calculating for file: " + filename)
         file_location = "./test_cases/" + filename
@@ -54,6 +59,8 @@ if __name__ == "__main__":
         routes = RoutesOptimization(io.get_edges())
         result = routes.calculate_routes()
         io.save_to_file(result, "./results/" + filename)
+        end_time = time.time()
+        print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
 
     print("done")
     print("files saved to ./results")
