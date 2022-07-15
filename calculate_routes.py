@@ -2,6 +2,7 @@ import sys
 import time
 from cycle_finder import CycleFinder
 from graph_io import Io
+from stats import Stats
 import os
 
 class RoutesOptimization():
@@ -32,10 +33,9 @@ class RoutesOptimization():
 
 
 if __name__ == "__main__":
-
-    print("making calculations...")
-
+    print("calculating...")
     io = Io()
+    stats = Stats()
     if(sys.argv[1] == "--all"):
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
         for file in files:
@@ -49,6 +49,10 @@ if __name__ == "__main__":
             io.save_to_file(result, "./results/" + file_location)
             end_time = time.time()
             print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
+            stats.add_data(file, (end_time - start_time) * 1000)
+
+        stats.plot_and_save("./stats/stats.png")
+        print("chart with executions times saved to ./stats/stats.png")
 
     else:
         start_time = time.time()
