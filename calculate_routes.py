@@ -28,13 +28,18 @@ class RoutesOptimization():
 
         return result_edges
 
+
 if __name__ == "__main__":
 
     # get all files and execute them, ploting the times
     if(sys.argv[1] == "--all"):
         pass
 
-    io = Io(sys.argv[1])
+    filename = sys.argv[1]
+    file_location = "./test_cases/" + filename
+
+    io = Io()
+    io.read_file(file_location)
     routes = RoutesOptimization(io.get_edges())
     
     print("Input edges:")
@@ -45,7 +50,7 @@ if __name__ == "__main__":
     result = routes.calculate_routes()
     print(result)
 
-    io.save_result(result)
+    io.save_to_file(result, "./results/" + filename)
 
 
 
