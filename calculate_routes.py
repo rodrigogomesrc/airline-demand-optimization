@@ -38,6 +38,7 @@ if __name__ == "__main__":
     stats = Stats()
     if(sys.argv[1] == "--all"):
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
+        files.sort()
         for file in files:
             start_time = time.time()
             print("calculating for file: " + file)

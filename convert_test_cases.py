@@ -10,7 +10,7 @@ class WeightConverter():
     
     def convert_weights(self, edges):
         self.edges = None
-        result = [(edge[0], edge[1], 1/edge[2] * 100) for edge in edges]
+        result = [(edge[0], edge[1], str(round(1/edge[2] * 100, 2))) for edge in edges]
         self.edges = result
         return result
 
@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
     if(sys.argv[1] == "--all"):
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
+        files.sort()
         for file in files:
             print("converting file: " + file)
             file_location = "./test_cases/" + file
