@@ -4,6 +4,9 @@ import os
 class Io:
 
     def __init__(self):
+        self.initialize_data()
+    
+    def initialize_data(self):
         self.edges = []
         self.lines = 0
         self.third_values = {}
@@ -17,6 +20,7 @@ class Io:
         return True
 
     def read_file(self, filename):
+        self.initialize_data()
         if(not self.check_if_file_exists(filename)):
             return False
 

@@ -1,6 +1,7 @@
 import sys
 from cycle_finder import CycleFinder
 from graph_io import Io
+import os
 
 class RoutesOptimization():
     def __init__(self, edges):
@@ -31,26 +32,31 @@ class RoutesOptimization():
 
 if __name__ == "__main__":
 
-    # get all files and execute them, ploting the times
-    if(sys.argv[1] == "--all"):
-        pass
-
-    filename = sys.argv[1]
-    file_location = "./test_cases/" + filename
+    print("making calculations...")
 
     io = Io()
-    io.read_file(file_location)
-    routes = RoutesOptimization(io.get_edges())
-    
-    print("Input edges:")
-    print(routes.get_input_edges())
-    print("\n")
+    if(sys.argv[1] == "--all"):
+        files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
+        for file in files:
+            print("calculating for file: " + file)
+            file_location = "./test_cases/" + file
+            io.read_file(file_location)
+            optimization_obj = RoutesOptimization(io.get_edges())
+            routes = RoutesOptimization(io.get_edges())
+            result = routes.calculate_routes()
+            io.save_to_file(result, "./results/" + file_location)
 
-    print("calculated edges:")
-    result = routes.calculate_routes()
-    print(result)
+    else:
+        filename = sys.argv[1]
+        print("calculating for file: " + filename)
+        file_location = "./test_cases/" + filename
+        io.read_file(file_location)
+        routes = RoutesOptimization(io.get_edges())
+        result = routes.calculate_routes()
+        io.save_to_file(result, "./results/" + filename)
 
-    io.save_to_file(result, "./results/" + filename)
+    print("done")
+    print("files saved to ./results")
 
 
 
