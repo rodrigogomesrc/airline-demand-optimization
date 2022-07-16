@@ -16,7 +16,7 @@ class WeightConverter():
 
     def save_converted_weights(self, filename, io_instance):
         if self.edges is None:
-            print("No edges to save")
+            print("Nenhuma aresta a ser salva")
             return False
         io_instance.save_to_file(self.edges, filename)
         return True
@@ -30,7 +30,7 @@ if __name__ == "__main__":
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
         files.sort()
         for file in files:
-            print("converting file: " + file)
+            print("convertendo arquivo: " + file)
             file_location = "./test_cases/" + file
             io.read_file(file_location)
             optimization_obj = RoutesOptimization(io.get_edges())
