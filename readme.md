@@ -15,7 +15,11 @@
 
 ## Como usar
 
-O programa usa como entrada grafos gerados [nesse site](https://algorithms.discrete.ma.tum.de/graph-algorithms/mst-kruskal/index_en.html). Ao criar um grafo de teste no site, baixe o arquivo e coloque na pasta __./test_cases__
+O programa usa como entrada grafos gerados [nesse site](https://algorithms.discrete.ma.tum.de/graph-algorithms/mst-kruskal/index_en.html). Ao criar um grafo de teste no site, baixe o arquivo e coloque na pasta __./test_cases__.
+
+Como saída o programa cria arquivos que podem ser visualizados pelo mesmo site.
+
+Para executar o programa deve ser possível executar arquivos python pela linha de comando, uma vez que é necessário passar argumentos como entrada.
 
 ### Executando algoritmo para um arquivo específico
 
