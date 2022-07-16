@@ -74,6 +74,8 @@ if __name__ == "__main__":
             print("gráfico com tempos de execução salvo em  ./stats/stats.png")
 
     else:
+        execution_data = []
+        execution_data.append('arquivo, tempo de execução (ms)')
         start_time = time.time()
         filename = sys.argv[1]
         print("calculando para o arquivo: " + filename)
@@ -83,6 +85,9 @@ if __name__ == "__main__":
         result = routes.calculate_routes()
         io.save_to_file(result, "./results/" + filename)
         end_time = time.time()
+        execution_data.append(filename + ', ' + str((end_time - start_time) * 1000))
+        io.save_stats_to_file(execution_data, "./stats/" + filename)
+        print("relatório salvo em ./stats/execution_data.txt")
         print("Tempo de execução: %.2f ms" %((end_time - start_time) * 1000))
 
     print("pronto")
