@@ -2,7 +2,7 @@ import sys
 import time
 from cycle_finder import CycleFinder
 from graph_io import Io
-from stats import Stats
+
 import os
 
 class RoutesOptimization():
@@ -35,11 +35,13 @@ class RoutesOptimization():
 if __name__ == "__main__":
     print("calculating...")
     io = Io()
-    stats = Stats()
+    stats = None
     use_chart = False
 
     try:
         if(sys.argv[2] == "--chart"):
+            from stats import Stats
+            stats = Stats()
             use_chart = True
     except IndexError:
         pass
