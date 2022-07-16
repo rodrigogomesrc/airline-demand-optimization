@@ -60,4 +60,11 @@ class Io:
                 +' ' + str(edge[2]) + '\n')
 
             f.close()
+
+    def save_stats_to_file(self, data, filename):
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        with open(filename, "w") as f:
+            for line in data:
+                f.write(line + '\n')
+            f.close()
        

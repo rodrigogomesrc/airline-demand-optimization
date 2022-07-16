@@ -22,7 +22,7 @@ class WeightConverter():
         return True
         
 if __name__ == "__main__":
-    print("converting test cases...")
+    print("convertendo casos de teste...")
     
     io = Io()
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     else:
         filename = sys.argv[1]
-        print("converting file: " + filename)
+        print("convertendo arquivo: " + filename)
         file_location = "./test_cases/" + filename
         io.read_file(file_location)
         optimization_obj = RoutesOptimization(io.get_edges())
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         result = converter.convert_weights(edges)
         converter.save_converted_weights("./converted_test_cases/" + filename, io)
 
-    print("conversion finished")
-    print("files saved to ./converted_test_cases")
+    print("conversão terminada")
+    print("arquivos com grafos resultantes salvos em ./converted_test_cases")
 
 

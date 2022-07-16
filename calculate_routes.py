@@ -36,12 +36,22 @@ if __name__ == "__main__":
     print("calculating...")
     io = Io()
     stats = Stats()
+    use_chart = False
+
+    try:
+        if(sys.argv[2] == "--chart"):
+            use_chart = True
+    except IndexError:
+        pass
+
     if(sys.argv[1] == "--all"):
         files = [f for f in os.listdir('./test_cases') if os.path.isfile(os.path.join('./test_cases', f))]
         files.sort()
+        execution_data = []
+        execution_data.append('arquivo, tempo de execução (ms)')
         for file in files:
             start_time = time.time()
-            print("calculating for file: " + file)
+            print("calculando para o arquivo " + file)
             file_location = "./test_cases/" + file
             io.read_file(file_location)
             optimization_obj = RoutesOptimization(io.get_edges())
@@ -49,26 +59,34 @@ if __name__ == "__main__":
             result = routes.calculate_routes()
             io.save_to_file(result, "./results/" + file)
             end_time = time.time()
-            print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
-            stats.add_data(file, (end_time - start_time) * 1000)
+            print("Tempo de execução: %.2f ms" %((end_time - start_time) * 1000))
 
-        stats.plot_and_save("./stats/stats.png")
-        print("chart with executions times saved to ./stats/stats.png")
+            if use_chart:
+                stats.add_data(file, (end_time - start_time) * 1000)
+
+            execution_data.append(file + ', ' + str((end_time - start_time) * 1000))
+        
+        io.save_stats_to_file(execution_data, "./stats/execution_data.txt")
+        print("relatório salvo em ./stats/execution_data.txt")
+    
+        if use_chart:
+            stats.plot_and_save("./stats/stats.png")
+            print("gráfico com tempos de execução salvo em  ./stats/stats.png")
 
     else:
         start_time = time.time()
         filename = sys.argv[1]
-        print("calculating for file: " + filename)
+        print("calculando para o arquivo: " + filename)
         file_location = "./test_cases/" + filename
         io.read_file(file_location)
         routes = RoutesOptimization(io.get_edges())
         result = routes.calculate_routes()
         io.save_to_file(result, "./results/" + filename)
         end_time = time.time()
-        print("Time taken: %.2f ms" %((end_time - start_time) * 1000))
+        print("Tempo de execução: %.2f ms" %((end_time - start_time) * 1000))
 
-    print("done")
-    print("files saved to ./results")
+    print("pronto")
+    print("arquivo com grafos resultantes salvos em ./results")
 
 
 
